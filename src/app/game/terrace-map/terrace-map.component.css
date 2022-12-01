@@ -1,0 +1,37 @@
+#terrace {
+  background-image: url("../../../assets/image/bg-tile.jpg");
+  width: 100%;
+  height: 100%;
+}
+.tableRest {
+  background-image: url("../../../assets/image/table_01.png");
+  width: 418px;
+  height: 287px;
+}
+
+img {
+  margin: 20px;
+  margin-left: 60px;
+}
+.zoomCustomer {
+  cursor: url("../../../assets/image/cursor-zooming.png"), auto;
+}
+.customerTop {
+  transform: rotate(3.142rad);
+}
+.customerBottom {
+  transform: rotate(0);
+}
+
+.badgeTable {
+  width: 418px;
+  height: 287px;
+}
+#btnDisplayNewCustomer {
+  bottom: 0.5rem;
+  left: 0.5rem;
+}
+#divNewCustomer {
+  width: 150px;
+  margin-right: 15px;
+}

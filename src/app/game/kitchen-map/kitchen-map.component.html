@@ -1,0 +1,131 @@
+<div class="row m-1">
+  <div class="col-sm-4">
+    <p class="text-white">Catalogue des Recettes</p>
+    <div class="bg-secondary p-1 d-flex align-content-start flex-wrap h-100">
+      <a
+        *ngFor="let item of listAllRecipes; index as i"
+        title="{{ item.name }}"
+        id="{{ item.id }}"
+        clickable
+        (click)="selectRecipe(i)"
+      >
+        <div
+          class="p-2"
+          id="ingredientsCart"
+          style="
+      background-image: url('assets/image/icons/{{ item.id }}.png');
+      "
+        ></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <p class="text-white">Recette sélectionnée</p>
+    <div
+      *ngIf="recipeSelected.id"
+      title="{{ recipeSelected.name }}"
+      class="p-2"
+      id="ingredientsCart"
+      style="
+      background-image: url('assets/image/icons/{{ recipeSelected.id }}.png');
+      "
+    ></div>
+    {{ recipeSelected.name }}
+    <div class="bg-secondary p-1 d-flex flex-wrap justify-content-around">
+      <a
+        *ngFor="let item of ingredientsRecipe; index as i"
+        title="{{ item.name }}"
+        id="{{ item.id }}"
+        clickable
+      >
+        <div
+          *ngIf="ingredientsQuantityAvailable[i] == 0"
+          class="p-2 position-relative"
+          id="ingredientsCart"
+          style="
+      background-image: url('assets/image/icons/{{ item.id }}.png');
+      "
+        >
+          <span
+            class="badge bg-light text-danger bottom-0 end-0 rounded-pill position-absolute"
+            >{{ ingredientsQuantityAvailable[i] }}</span
+          >
+          <img class="imgred" src="assets/image/red.png" />
+        </div>
+
+        <div
+          *ngIf="ingredientsQuantityAvailable[i] > 0"
+          class="p-2 position-relative"
+          id="ingredientsCart"
+          style="
+      background-image: url('assets/image/icons/{{ item.id }}.png');
+      "
+        >
+          <span
+            class="badge bg-light text-dark bottom-0 end-0 rounded-pill position-absolute"
+            >{{ ingredientsQuantityAvailable[i] }}</span
+          >
+        </div>
+      </a>
+      <a *ngFor="let item of numberNothing">
+        <div
+          class="p-2 position-relative"
+          id="ingredientsCart"
+          style="background-image: url('assets/image/icons/nothing.png')"
+        ></div>
+      </a>
+    </div>
+    <div class="bg-secondary"></div>
+    <label for="pet-select">Choix du client:</label>
+
+    <select class="form-select" (change)="customerChange($event)">
+      <option value="">--Choisissez un client--</option>
+      <option
+        *ngFor="let item of customerWithTable; index as i"
+        value="{{ i }}"
+      >
+        {{ item.name }}
+      </option>
+    </select>
+    <button
+      class="btn btn-light m-1"
+      clickable
+      (click)="commitRecipe()"
+      [disabled]="!customerChoosing || !recipeReady ? 'disabled' : null"
+    >
+      Lancer la Recette
+    </button>
+  </div>
+
+  <div class="col-sm-5">
+    <p class="text-white">Recettes en cours de préparation</p>
+    <div *ngFor="let item of listPreparedRecipe; index as i">
+      {{ item.recipe.name }} pour le client : {{ item.customer.name }}
+      <div class="progress">
+        <div
+          *ngIf="item.pourcentProgress == '100%'"
+          class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+          role="progressbar"
+          aria-label="Animated striped example"
+          [style.width]="item.pourcentProgress"
+        ></div>
+        <div
+          *ngIf="item.pourcentProgress != '100%'"
+          class="progress-bar progress-bar-striped progress-bar-animated"
+          role="progressbar"
+          aria-label="Animated striped example"
+          [style.width]="item.pourcentProgress"
+        ></div>
+      </div>
+      <button
+        class="btn btn-light m-1"
+        clickable
+        (click)="serveAtCustomer(item.customer.id)"
+        [disabled]="item.pourcentProgress != '100%'"
+      >
+        Servir
+      </button>
+    </div>
+  </div>
+</div>

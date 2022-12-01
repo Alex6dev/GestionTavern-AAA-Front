@@ -1,0 +1,56 @@
+aside,
+#boxContent {
+  border-radius: 10px;
+  border: var(--color1) groove 8px;
+}
+
+#boxContent {
+  background-image: url("../../assets/image/bg-wood.jpg");
+  /*
+  background-repeat: no-repeat;
+  background-size: cover;
+  */
+  min-width: 720px;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#map {
+  background-color: var(--color1);
+  width: 98%;
+  height: 95%;
+  border-radius: 10px;
+}
+
+#btnDisplaySalle {
+  bottom: 0.5rem;
+  left: 0.5rem;
+  z-index: 10;
+}
+
+#boxSalle {
+  background-color: var(--color3);
+  z-index: 10;
+}
+
+aside li {
+  border: ridge rgba(0, 0, 0, 0.507);
+  padding: 5px;
+  background-color: var(--color1);
+}
+
+#boxSalle .active {
+  border: var(--color4) groove 8px;
+  color: var(--color5);
+}
+
+#boxSalle button {
+  cursor: pointer;
+  color: var(--color6);
+  background-color: transparent;
+  border: none;
+  width: 100%;
+}

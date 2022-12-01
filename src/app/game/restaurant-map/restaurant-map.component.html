@@ -1,0 +1,135 @@
+<div class="w-100 h-100 map position-relative d-flex flex-column  justify-content-between pb-5" id="room">
+  
+  <div id="containerNewCustomer" class="d-none" >
+    <img src="../../../assets/image/doorwomen.png" alt="Portier" class="imgDoorWomen"/>
+    <div id="triangle"></div>
+    <div id="containerTextNewCustomer">
+      <form>
+        <label>Un nouveau client frappe à la porte. Voulez-vous le faire entrer ?</label>
+        <div class="d-flex flex-rox justify-content-around mt-4">
+          <button type="button" class="btn btn-outline-dark" (click)="getNewCustomer(true)" >Oui</button>
+          <button type="button" class="btn btn-outline-dark" (click)="getNewCustomer(false)" >Non</button>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <div *ngFor="let table of tableRestWithCustomer;" >
+    <div *ngFor="
+      let customer of table.customers;
+      index as j
+    " class="position-absolute textCustomer d-none" id="boxInfoCustomer{{customer.id}}">
+      <p class="position-relative" >
+        <button type="button" (click)="displayBoxInfoCustomer(false,customer.id)" class="btn-close btn-info-bulle-customer" aria-label="Close"></button>
+        name: {{customer.name}}<br>
+        purseOfGold: {{customer.purseOfGold}}<br>
+        happiness: {{customer.happiness}}<br>
+        hunger: {{customer.hunger}}<br>
+        thirst: {{customer.thirst}}<br>
+        nauseaLevel: {{customer.nauseaLevel}}<br>
+        alcoholLevel: {{customer.alcoholLevel}}<br>
+        toilet: {{customer.toilet}}<br>
+        timeInTavern: {{customer.timeInTavern}}<br>
+        nauseaTolerance: {{customer.nauseaTolerance}}<br>
+        alcoholTolerance: {{customer.alcoholTolerance}}<br>
+        gender: {{customer.gender}}<br>
+        expGiven: {{customer.expGiven}}<br>
+        CommandeList: <span *ngFor="let customerRecipe of customer.commandList" class="commandList">{{customerRecipe.recipeName}}</span>
+      </p>
+    </div>
+
+  </div>
+  <div class="d-flex flex-row d-flex justify-content-between flex-wrap">
+    <div class="col-sm-6" id="bar"></div>
+    <div class="accordion accordion-flush" *ngIf="newCustomers.length">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            <h1><span class="badge rounded-pill bg-danger">!</span></h1>
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+        >
+          <select
+            class="form-select"
+            aria-label="-Client-"
+            (change)="tableChange($event)"
+          >
+            <option selected>-Table-</option>
+            <option
+              value="{{ i }}"
+              *ngFor="let table of tableRestWithCustomer; index as i"
+            >
+              Table {{ i + 1 }}
+            </option>
+          </select>
+          <select
+            class="form-select"
+            aria-label="-Client-"
+            (change)="customerChange($event)"
+          >
+            <option selected>-Client-</option>
+            <option
+              value="{{ i }}"
+              *ngFor="let customer of newCustomers; index as i"
+            >
+              {{ customer.id }}
+            </option>
+          </select>
+          <button
+            type="button"
+            class="btn btn-secondary m-3"
+            (click)="assignTable()"
+            clickable
+          >
+            Placer le client
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row flex-wrap justify-content-around">
+    <div
+      *ngFor="let table of tableRestWithCustomer; index as i"
+      class="col-sm-6"
+      class="tableRest"
+    >
+      <span
+        class="position-absolute badge top-50 rounded-pill bg-success ms-3"
+      >
+        {{ i + 1 }}
+      </span>
+      <div  class="d-flex flex-column flex-wrap h-100">
+        <div *ngFor="
+              let customer of tableRestWithCustomer[i].customers;
+              index as j
+            "
+            class="position-relative"
+            id="boxCustomer{{customer.id}}"
+        >
+          <img
+            src="../../../assets/image/customer_0{{ customer.numImg }}.png"
+            alt="client attablé "
+            class="zoomCustomer customer{{ j%2}}"
+            (click)="displayBoxInfoCustomer(true,customer.id)"
+          >
+        </div>
+      </div>
+  
+    </div>
+
+  </div>
+</div>
+

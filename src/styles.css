@@ -1,0 +1,115 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --color1: #c45404;
+  --color2: rgba(165, 42, 42, 0.329);
+  --color3: rgba(255, 196, 0, 0.575);
+  --color4: rgb(176, 9, 9);
+  --color5: rgba(255, 255, 0, 0.911);
+  --color6: #f1adad;
+  --color7: #582b07;
+  --textShadow: 2px 2px 1px #000000;
+}
+
+body {
+  background-image: url(/assets/image/bgGame.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  box-sizing: border-box;
+  font-family: "Skranji", cursive;
+}
+
+h2 {
+  color: var(--color3);
+  text-shadow: 2px 2px 1px#000000;
+}
+
+.bgWood {
+  background-image: url(/assets/image/bg-wood.jpg);
+  /*
+    background-repeat: no-repeat;
+    background-size: cover;
+    */
+  border: rgb(125, 50, 4) groove 5px;
+  border-radius: 10px;
+}
+
+.a-brown {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.a-brown:hover {
+  color: #f78c13;
+  text-shadow: var(--textShadow);
+}
+
+.blackAlpha {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px;
+  color: white;
+}
+
+.btn-brown {
+  border-radius: 20px;
+  text-decoration: none;
+  background: linear-gradient(0deg,
+      rgba(124, 61, 10, 1) 39%,
+      rgba(223, 106, 46, 1) 98%);
+  font-weight: bold;
+  color: #2e1501;
+  border: #582b07 groove 2px;
+  padding: 0.5rem;
+  transition: color 0.2s;
+}
+
+.btn-brown:hover {
+  color: wheat;
+}
+
+.btnChoice {
+  border-radius: 20px;
+  background: linear-gradient(0deg,
+      rgba(124, 61, 10, 1) 39%,
+      rgba(223, 106, 46, 1) 98%);
+  font-weight: bold;
+  color: #ffffff;
+  border: #582b07 groove 2px;
+}
+
+.btnChoice:active {
+  background: rgb(145, 40, 1);
+  background: linear-gradient(0deg,
+      rgba(145, 40, 1, 1) 35%,
+      rgba(201, 62, 6, 1) 97%);
+}
+
+.colorOrange {
+  color: #c53f00;
+  transition: color 0.2s;
+}
+
+.colorOrange:hover {
+  color: #f78c13;
+}
+
+.logo {
+  width: 30%;
+}
+
+.textShadow {
+  text-shadow: 2px 2px 1px rgb(0, 0, 0);
+}
+
+.title {
+  color: var(--color1);
+  text-shadow: var(--textShadow);
+}
+
+@media only screen and (max-width: 880px) {
+  .logo {
+    width: 80%;
+  }
+}

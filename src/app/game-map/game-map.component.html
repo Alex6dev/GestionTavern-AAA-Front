@@ -1,0 +1,56 @@
+<div class="row">
+  <section class="col-11 mx-auto p-0" id="boxContent">
+    <div id="map" class="position-relative">
+      <button
+        type="button"
+        id="btnDisplaySalle"
+        class="btn btn-success position-absolute"
+        (click)="displaySalleBox()"
+      >
+        <i class="fa-solid fa-list"></i>
+      </button>
+      <aside class="position-absolute d-none" id="boxSalle">
+        <h2 class="m-2 fs-1">Salle</h2>
+        <ul
+          class="d-flex flex-column my-1 justify-content-start p-0 list-unstyled"
+        >
+          <li class="m-1 fs-5 btnSalle p-0">
+            <button
+              type="button"
+              id="cuisine"
+              class="position-relative"
+              (click)="clickUrl('cuisine')"
+            >
+              Cuisine
+            </button>
+          </li>
+          <li class="m-1 fs-5 btnSalle p-0">
+            <button
+              type="button"
+              id="shop"
+              class="position-relative"
+              (click)="clickUrl('store')"
+            >
+              Magasin
+            </button>
+          </li>
+          <li class="m-1 fs-5 btnSalle p-0">
+            <button
+              type="button"
+              id="restaurant"
+              class="active position-relative"
+              (click)="clickUrl('restaurant')"
+            >
+              Restaurant
+            </button>
+          </li>
+          <!--
+                    <li class="m-1 fs-5 btnSalle p-0" ><button type="button" id="terrasse" class="position-relative" (click)="clickUrl('terrace')" >Terrasse</button></li>
+                    -->
+        </ul>
+      </aside>
+      <router-outlet></router-outlet>
+    </div>
+  </section>
+</div>
+<!-- les sous le niveau l'exp -->

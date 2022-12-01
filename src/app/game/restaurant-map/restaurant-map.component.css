@@ -1,0 +1,126 @@
+.map{
+  --bs-gutter-x: 0 !important;
+}
+#room {
+  background-image: url("../../../assets/image/bg-stone.jpg");
+  width: 98%;
+  height: 100%;
+  border-radius: 10px;
+}
+.tableRest {
+  background-image: url("../../../assets/image/table_01.png");
+  width: 418px;
+  height: 287px;
+  position: relative;
+}
+.accordion{
+  right: 0;
+  width: 150px;
+  z-index: 20;
+}
+@media screen and (max-width:1000px) {
+  .accordion{
+    position: absolute;
+  }
+}
+#bar {
+  background-image: url("../../../assets/image/bar.png");
+  width: 692px;
+  height: 416px;
+}
+
+.customer0{
+  transform: rotate(180deg);
+}
+.zoomCustomer {
+  cursor: url("../../../assets/image/cursor-zooming.png"), auto;
+  width: 130px;
+  margin: 0 0 0 40px;
+}
+.btn-info-bulle-customer{
+  position: absolute;
+  top: -15px;
+  right: -15px;
+}
+.textCustomer{
+  
+  border-radius: 10px;
+  top: 10vh;
+  left: 35vw;
+  padding:  20px 30px 20px 20px;
+  background-color: var(--color1);
+  z-index: 10;
+}
+.commandList{
+  z-index:11
+}
+.customerTop {
+  transform: rotate(3.142rad);
+}
+#containerNewCustomer{
+  width: 50vw;
+  height: 25vh;
+  position: absolute;
+  top: 25vh;
+  left: 20%;
+  display: flex;
+  flex-direction: row;
+  padding: 20px 20px 0 20px ;
+  background-color: brown;
+  z-index: 20;
+  border-radius: 50px;
+}
+.imgDoorWomen{
+  width: 130px;
+}
+#triangle {
+  transform: rotate(-90deg);
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 20px;
+  border-color: transparent transparent rgb(255, 250, 223) transparent;
+}
+#containerTextNewCustomer{
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(255, 250, 223);
+  padding: 15px;
+  border-radius: 0 50px 50px 50px;
+  height: min-content;
+}
+.badgeTable {
+  width: 418px;
+  height: 287px;
+  position: relative;
+}
+#btnDisplayNewCustomer {
+  bottom: 0.5rem;
+  left: 0.5rem;
+}
+.badge{
+  font-size: 1.5rem;
+}
+.containerRecolteCustomer{
+  background-color: white;
+  top: 20px;
+  left: 80px;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  animation: floatCoin 1s infinite alternate ;
+}
+@keyframes floatCoin {
+  0%{
+    top: 20px;
+  }
+  100%{
+    top: 30px;
+  }
+  
+}
+

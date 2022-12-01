@@ -1,0 +1,170 @@
+.bannerManager{
+    background-color: rgb(58, 63, 90);
+    padding: 10px 0;
+    margin-bottom: 8px;
+}
+.bannerManager div{
+    background-color: rgb(105, 100, 100);
+    border-radius: 1rem;
+    padding: 10px 20px;
+    color:var(--color7);
+}
+.bannerManager p{
+    margin: 0;
+    color: rgb(175, 205, 230);
+}
+#conteneurExpMax{
+    padding: 0;
+    width: 100px;
+    height: 20px;
+    background-color: rgb(85, 85, 85);
+}
+#conteneurExp{
+    padding: 0;
+    height: 20px;
+    background-color: cornflowerblue;
+}
+
+/***loader****/
+#container{
+    width: 100%;
+    height: 100vh;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    z-index: 30;
+    animation: disappearance 2s 2s forwards;
+  }
+  #verre{
+    width: 150px;
+    height: 150px;
+    background-color: aliceblue;
+    border-radius: 5px 5px 5px 5px;
+    position: relative;
+    box-shadow: inset 0px 0px 7px 2px rgb(196, 196, 196);
+  }
+  #contenu{
+    width: 100%;
+    height: 170%;
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    transform-origin: bottom;
+    animation: remplissement 1s 0s ease-in-out backwards;
+  
+  
+  }
+  #cloud{
+    color: white;
+    text-shadow: 0px 0px 1px black;
+    font-size: 6.5rem;
+    margin-bottom: 5px;
+  }
+  #biere{
+    width: 87%;
+    height: 52%;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    position: relative;
+    background: #D77A01;
+    overflow: hidden;
+    background: -moz-linear-gradient(top, #D77A01 0%, #F59F00 100%);
+    background: -webkit-linear-gradient(top, #D77A01 0%, #F59F00 100%);
+    background: linear-gradient(to bottom, #D77A01 0%, #F59F00 100%);
+  }
+  
+  .bulle{
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    background: #c57001;
+    position: absolute;
+  }
+  
+  #bulle1{
+    bottom: 10px;
+    right: 10px;
+    animation: bulleMonte 2s 2s ease-in infinite;
+  }
+  
+  #bulle2{
+    bottom: 20px;
+    left: 10px;
+    animation: bulleMonte 2s 4.5s ease-in infinite;
+  }
+  #bulle3{
+    bottom: 40px;
+    right: 20px;
+    animation: bulleMonte 2s 3.2s ease-in infinite;
+  }
+  #bulle4{
+    bottom: 25px;
+    right: 40px;
+    animation: bulleMonte 2s 2.2s ease-in infinite;
+  }
+  #bulle5{
+    bottom: 50px;
+    right: 45px;
+    animation: bulleMonte 2s 5s ease-in infinite;
+  }
+  #poigner{
+    width: 50px;
+    height: 100px;
+    background-color: aliceblue;
+    border-radius: 0px 20px 20px 0px ;
+    box-shadow: inset 0px 0px 7px 2px rgb(196, 196, 196);
+  
+  }
+  #poignerVide{
+    width: 70%;
+    height: 70%;
+    background-color: antiquewhite;
+    margin-top: 30%;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0px 0px 7px 2px rgb(196, 196, 196);
+  
+  }
+  
+  @keyframes bulleMonte {
+    0%{
+        transform:translateY(0);
+        opacity: 0;
+    }
+    10%{
+        opacity: 1;
+    }
+  
+    100%{
+        opacity: 0;
+        transform:translateY(-100px);
+  
+    }
+  }
+  @keyframes remplissement {
+    0%{
+        transform: scaleY(0%);
+    }
+    100%{
+        transform: scaleY(100%);
+    }
+  }
+  @keyframes disappearance {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+  }
+  
+  

@@ -1,0 +1,69 @@
+<ul class="list-group-flush p-0 d-flex align-items-center text-center list-choice mb-5 ">
+    <li class="list-group-item  blackAlpha p-3 col-6 ">
+        <a class="a-brown" routerLink="/home/connexion">Connexion</a>
+    </li>
+    <li class="list-group-item  p-3 col-6 ">
+        <a class="a-brown" routerLink="/home/inscription">S'inscrire</a>
+    </li>
+</ul>
+<form [formGroup]="formRegistration" (ngSubmit)="onSubmit()"
+    class="offset-0 offset-sm-0 offset-lg-1 col-12 col-sm-12 col-lg-10 text-white">
+    <div class="row flex-column align-items-center">
+        <div class="mb-5 text-center col-11 text-sm-center text-lg-start">
+            <label for="email" class="form-label fw-bold ">Adresse E-mail</label>
+
+            <input formControlName="email" type="email" class="form-control opacity-75" id="email">
+            <p class="text-danger" *ngIf="submitted && f.email.errors?.['required']">Ce champ est requis</p>
+            <p class="text-danger" *ngIf="submitted && f.email.errors?.['email']">L'e-mail est pas valide</p>
+        </div>
+        <div class="mb-5 text-center col-11 text-sm-center text-lg-start">
+            <label for="nickname" class="form-label fw-bold ">NickName</label>
+            <input formControlName="nickname" type="text" class="form-control opacity-75" id="nickname">
+            <p class="text-danger" *ngIf="submitted && f.nickname.errors?.['required']">Ce champ est requis</p>
+            <p class="text-danger" *ngIf="submitted && f.nickname.errors?.['minlength']">Le nickname doit avoir au moins
+                8 caractéres
+            </p>
+            <p class="text-danger" *ngIf="submitted && f.nickname.errors?.['maxlength']">Le nickname doit pas avoir plus
+                de 30
+                caractéres</p>
+        </div>
+        <div class="mb-5 col-11 text-center text-sm-center text-lg-start">
+            <label for="password" class="form-label fw-bold  ">Mot de passe</label>
+            <input formControlName="password" type="password" class="form-control opacity-75" id="password">
+            <p class="text-danger" *ngIf="submitted && f.password.errors?.['required']">Ce champ est requis</p>
+            <p class="text-danger" *ngIf="submitted && f.password.errors?.['minlength']">Le mot de passe doit avoir au
+                moins 8
+                caractéres
+            </p>
+            <p class="text-danger" *ngIf="submitted && f.password.errors?.['maxlength']">Le mot de passe doit pas avoir
+                plus de 30
+                caractéres</p>
+            <p class="text-danger" *ngIf="submitted && f.matchingPassword.hasError('matching')">Les deux mots de passes
+                doit correspondre</p>
+
+        </div>
+        <div class="mb-5 col-11 text-center text-sm-center text-lg-start">
+            <label for="confirmPassword" class="form-label fw-bold  ">Confirmer votre mot de passe</label>
+            <input formControlName="matchingPassword" type="password" class="form-control opacity-75"
+                id="confirmPassword">
+            <p class="text-danger" *ngIf="submitted && f.matchingPassword.errors?.['required']">Ce champ est requis</p>
+            <p class="text-danger" *ngIf="submitted && f.matchingPassword.errors?.['minlength']">Le mot de passe doit
+                avoir au
+                moins 8
+                caractéres
+            </p>
+            <p class="text-danger" *ngIf="submitted && f.matchingPassword.errors?.['maxlength']">Le mot de passe doit
+                pas
+                avoir
+                plus de 30
+                caractéres</p>
+            <p class="text-danger" *ngIf="submitted && f.matchingPassword.hasError('matching')">Les deux mots de passes
+                doit correspondre</p>
+        </div>
+
+        <div class="text-center mb-3">
+            <button type="submit" class="w-50 btn-brown p-3">S'inscrire</button>
+        </div>
+
+    </div>
+</form>

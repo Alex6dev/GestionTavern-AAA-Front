@@ -1,0 +1,13 @@
+img {
+  width: 55px;
+  height: 55px;
+  margin: 4px;
+}
+#ingredientsCart {
+  width: 55px;
+  height: 55px;
+  margin: 4px;
+  background: no-repeat;
+  background-size: 55px;
+  text-align: left;
+}

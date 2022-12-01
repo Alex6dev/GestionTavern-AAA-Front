@@ -1,0 +1,22 @@
+<div class="row align-items-center text-center justify-content-center">
+    <div>
+        <h1 class="text-center title m-3">Sélectionner votre manager</h1>
+    </div>
+    <div class="card p-0 col-lg-4 col-sm-10 col-10 colorCardBody borderCard m-4 " *ngFor="let manager of managers">
+        <div class="card-header colorCardHead text-center">
+            <h2 class="title">{{manager.name}}</h2>
+        </div>
+        <div class="card-body colorCardBody">
+            <h5 class="card-title">Niveau: {{manager.level}}</h5>
+            <p class="card-text">Or: {{manager.chest}}</p>
+            <p class="card-text">Exp: {{manager.experience}}/{{manager.maxExp}}</p>
+            <p class="card-text">Reputation: {{manager.reputation}}</p>
+            <button type="button" (click)="selectManager(manager.id)"
+                class="btn-brown">Jouer ce manager</button>
+        </div>
+
+    </div>
+    <div class="text-center mb-3">
+        <button routerLink="/home/menu" type="button" class="w-25 m-1 btn-brown p-3">Retour</button>
+    </div>
+</div>

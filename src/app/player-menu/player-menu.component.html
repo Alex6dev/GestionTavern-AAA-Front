@@ -1,0 +1,13 @@
+<div class="row align-items-center px-3 px-sm-3 px-md-0 text-center justify-content-center">
+    <div>
+        <h1 *ngIf="currentUser" class="title">Bienvenue {{currentUser.player?.nickname}}</h1>
+        <h2 class="text-center  m-3">Que souhaitez-vous faire ?</h2>
+    </div>
+
+    <div class="m-4 d-flex justify-content-around  flex-column flex-md-row ">
+        <a class="btn-brown mb-3" routerLink="/home/manager/add">Créer un manager</a>
+        <a class="btn-brown mb-3" routerLink="/home/manager/select">Sélectionner un manager</a>
+        <a (click)="logOut()" class="btn-brown mb-3 cursor">Deconnexion</a>
+    </div>
+
+</div>

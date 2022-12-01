@@ -1,0 +1,112 @@
+<div class="row h-75 m-1">
+  <div class="col-sm-4">
+    <p class="text-white">Inventaire</p>
+    <div class="bg-secondary p-1 d-flex align-content-start flex-wrap h-100">
+      <a
+        *ngFor="let item of inventory; index as i"
+        title="{{ item.name }}"
+        id="{{ item.id }}"
+        (click)="addIngredientToSelling(i)"
+        clickable
+      >
+        <div
+          class="p-2 position-relative"
+          id="ingredientsCart"
+          style="
+  background-image: url('assets/image/icons/{{ item.id }}.png');
+  "
+        >
+          <span
+            class="badge bg-light text-dark bottom-0 end-0 rounded-pill position-absolute"
+            >{{ item.quantity }}</span
+          >
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-sm-4 text-center">
+    <div class="row">
+      <div class="col-sm-6 text-left">
+        <p class="text-white">Vente</p>
+        <span class="badge text-dark bg-warning rounded-pill">{{
+          totalSellingPrice
+        }}</span>
+        <div class="bg-secondary d-flex flex-wrap text-left">
+          <a
+            *ngFor="let item of cartSelling; index as i"
+            title="{{ item.name }}"
+            id="{{ item.id }}"
+            (click)="removeIngredientToSelling(i)"
+            clickable
+          >
+            <div
+              class="p-2 position-relative"
+              id="ingredientsCart"
+              style="
+    background-image: url('assets/image/icons/{{ item.id }}.png');
+    "
+            >
+              <span
+                class="badge bg-light text-dark bottom-0 end-0 rounded-pill position-absolute"
+                >{{ item.quantity }}</span
+              >
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <p class="text-white">Achat</p>
+        <span class="badge text-dark bg-warning rounded-pill">{{
+          totalBuyingPrice
+        }}</span>
+
+        <div class="bg-secondary d-flex flex-wrap text-left">
+          <a
+            *ngFor="let item of cartBuying; index as i"
+            title="{{ item.name }}"
+            id="{{ item.id }}"
+            (click)="removeIngredientToBuying(i)"
+            clickable
+          >
+            <div
+              class="p-2 position-relative"
+              id="ingredientsCart"
+              style="
+        background-image: url('assets/image/icons/{{ item.id }}.png');
+        "
+            >
+              <span
+                class="badge bg-light text-dark bottom-0 end-0 rounded-pill position-absolute"
+                >{{ item.quantity }}</span
+              >
+            </div>
+          </a>
+        </div>
+      </div>
+      <button class="btn btn-light m-1" clickable (click)="commitTransaction()">
+        Valider la transaction
+      </button>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <p class="text-white">Magasin</p>
+    <div class="bg-secondary p-1 h-100">
+      <a
+        *ngFor="let item of ingredients; index as i"
+        title="{{ item.name }}"
+        id="{{ item.id }}"
+        (click)="addIngredientToBuying(i)"
+        clickable
+      >
+        <img
+          class="bg-image"
+          src="assets/image/icons/{{ item.id }}.png"
+          alt=""
+        />
+      </a>
+    </div>
+  </div>
+</div>

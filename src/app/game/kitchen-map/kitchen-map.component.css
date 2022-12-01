@@ -1,0 +1,21 @@
+img {
+  width: 55px;
+  height: 55px;
+  margin: 4px;
+}
+#ingredientsCart {
+  width: 55px;
+  height: 55px;
+  margin: 4px;
+  background-size: 55px;
+}
+
+.imgred {
+  z-index: 10;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0px;
+}

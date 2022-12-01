@@ -1,0 +1,17 @@
+<form [formGroup]="manager" class="offset-0 offset-sm-0 offset-lg-1 col-12 col-sm-12 col-lg-10 text-white"
+    (ngSubmit)="onSubmit()">
+    <div class="row flex-column align-items-center">
+        <div>
+            <h1 class="text-center title m-3">Création d'un manager</h1>
+        </div>
+        <div class="mb-5 text-center col-11 text-sm-center text-lg-start">
+            <label for="name" class="form-label fw-bold ">Nom de votre manager</label>
+            <input formControlName="name" type="text" class="form-control opacity-75" id="name">
+        </div>
+        <div class="text-center mb-3">
+            <button routerLink="/home/menu" type="button" class="m-1 btn-brown p-3 ">Retour</button>
+            <button type="submit" class="btn-brown m-1 p-3">Créer le manager</button>
+        </div>
+
+    </div>
+</form>

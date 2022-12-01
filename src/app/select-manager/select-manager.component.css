@@ -1,0 +1,14 @@
+.colorCardHead {
+    background-color: var(--color7);
+}
+
+.colorCardBody {
+    background-color: #8b5730;
+}
+
+
+
+.borderCard {
+    border: rgb(125, 50, 4) groove 5px;
+    border-radius: 10px;
+}
