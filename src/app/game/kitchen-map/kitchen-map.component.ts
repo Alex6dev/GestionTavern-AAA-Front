@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { shareReplay, Subscription } from 'rxjs';
 import { CustomerModel } from 'src/app/interfaces/customer';
 import {
@@ -23,7 +23,7 @@ import { RecipeCustomerService } from 'src/app/services/recipeCustomer/recipe-cu
   templateUrl: './kitchen-map.component.html',
   styleUrls: ['./kitchen-map.component.css'],
 })
-export class KitchenMapComponent implements OnInit {
+export class KitchenMapComponent implements OnInit , OnDestroy{
   sub: Subscription = new Subscription();
   customers: CustomerModel[] = [];
   ingredients: IngredientModel[] = [];
@@ -72,8 +72,6 @@ export class KitchenMapComponent implements OnInit {
 
     this.sub = this.obsRecipes$.subscribe((recipes) => {
       this.listAllRecipes = recipes;
-
-      console.log(this.listAllRecipes);
     });
     this.sub = this.obsInventory$.subscribe((inventory) => {
       this.inventory = inventory;
@@ -81,11 +79,9 @@ export class KitchenMapComponent implements OnInit {
     });
     this.sub = this.obsIngredients$.subscribe((ingredients) => {
       this.ingredients = ingredients;
-      console.log(this.ingredients);
     });
     this.sub = this.obsManager$.subscribe((manager) => {
       this.manager = manager;
-      console.log(this.manager);
     });
     this.sub = this.obsCustomer$.subscribe((customers) => {
       this.customers = customers;
@@ -103,7 +99,6 @@ export class KitchenMapComponent implements OnInit {
           }
         }
       });
-      console.log(this.customers);
     });
 
     this.refreshRecipeCustomerPreparation();

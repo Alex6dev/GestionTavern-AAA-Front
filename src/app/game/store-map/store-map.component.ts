@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription, VirtualTimeScheduler } from 'rxjs';
 import {
   IngredientModel,
   IngredientQuantity,
-  ShopIngredientDto,
-  ShopIngredientQuantity,
 } from 'src/app/interfaces/ingredient';
 import { IngredientsService } from 'src/app/services/ingredients/ingredients.service';
 import { InventoryManagerService } from 'src/app/services/inventoryManager/inventory-manager.service';
@@ -15,7 +13,7 @@ import { StoreService } from 'src/app/services/store/store.service';
   templateUrl: './store-map.component.html',
   styleUrls: ['./store-map.component.css'],
 })
-export class StoreMapComponent implements OnInit {
+export class StoreMapComponent implements OnInit , OnDestroy{
   ingredients: IngredientModel[] = [];
   inventory: IngredientQuantity[] = [];
   cartSelling: IngredientQuantity[] = [];
@@ -24,11 +22,7 @@ export class StoreMapComponent implements OnInit {
   totalBuyingPrice: number = 0;
   totalSellingPrice: number = 0;
 
-  shopIngredientDtoToSelling = {} as ShopIngredientDto;
-  shopIngredientDtoToBuying = {} as ShopIngredientDto;
-
-  sub1: Subscription = new Subscription();
-  sub2: Subscription = new Subscription();
+  sub: Subscription = new Subscription();
 
   constructor(
     private ingredientsService: IngredientsService,
@@ -37,18 +31,17 @@ export class StoreMapComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sub1 = this.ingredientsService.ingredients$.subscribe((ingredient) => {
+    this.sub = this.ingredientsService.ingredients$.subscribe((ingredient) => {
       this.ingredients = ingredient;
-      this.sub2 = this.inventoryManagerService.inventaireConnect$.subscribe(
-        (inventory) => {
-          this.inventory = inventory;
-        }
-      );
     });
+    this.sub = this.inventoryManagerService.inventaireConnect$.subscribe(
+      (inventory) => {
+        this.inventory = inventory;
+      }
+    );
   }
   ngOnDestroy(): void {
-    this.sub1.unsubscribe;
-    this.sub2.unsubscribe;
+    this.sub.unsubscribe;
   }
   addIngredientToBuying(index: number) {
     let ingredient: IngredientQuantity | undefined;
@@ -146,120 +139,26 @@ export class StoreMapComponent implements OnInit {
   }
 
   private buyingRequest() {
-    this.shopIngredientDtoToBuying.idManager = parseInt(
-      sessionStorage.getItem('idManager')!
-    );
-    this.shopIngredientDtoToBuying.shopIngredientQuantity = [];
-    this.cartBuying.forEach((element) => {
-      if (element.quantity != undefined) {
-        const shopIngredientQuantity = {} as ShopIngredientQuantity;
-        shopIngredientQuantity.idIngredient = element.id;
-        shopIngredientQuantity.quantity = element.quantity;
-        this.shopIngredientDtoToBuying.shopIngredientQuantity.push(
-          shopIngredientQuantity
-        );
+    //send the post with the argument = this.cartBuying
+    this.storeService.buyIngredients(this.cartBuying).subscribe(response=>{
+      if(response){
+        this.cartBuying=[];
+        this.totalBuyingPrice=0;
       }
     });
-    //envoie du post avec comme argument this.shopIngredientDtoToBuying
-    this.storeService
-      .buyIngredients(this.shopIngredientDtoToBuying)
-      .subscribe((inventory) => {
-        if (this.storeService.isInventory(inventory)) {
-          this.inventory = inventory;
-          this.cartBuying = [];
-          this.totalBuyingPrice = 0;
-        } else {
-          //erreur venant du back
-        }
-      });
   }
   private sellingRequest() {
-    this.shopIngredientDtoToSelling.idManager = parseInt(
-      sessionStorage.getItem('idManager')!
-    );
-    this.shopIngredientDtoToSelling.shopIngredientQuantity = [];
-    this.cartSelling.forEach((element) => {
-      if (element.quantity != undefined) {
-        const shopIngredientQuantity = {} as ShopIngredientQuantity;
-        shopIngredientQuantity.idIngredient = element.id;
-        shopIngredientQuantity.quantity = element.quantity;
-        this.shopIngredientDtoToSelling.shopIngredientQuantity.push(
-          shopIngredientQuantity
-        );
+    //send the post with the argument = this.cartSelling
+    this.storeService.sellIngredients(this.cartSelling).subscribe(response=>{
+      if(response){
+        this.cartSelling=[];
+        this.totalSellingPrice=0;
       }
     });
-    //envoie du post avec comme argument this.shopIngredientDtoToSelling
-    this.storeService
-      .sellIngredients(this.shopIngredientDtoToSelling)
-      .subscribe((inventory) => {
-        if (this.storeService.isInventory(inventory)) {
-          this.inventory = inventory;
-          this.totalSellingPrice = 0;
-          this.cartSelling = [];
-        } else {
-          //erreur venant du back
-        }
-      });
   }
   private sellingAndBuyingRequest() {
-    this.shopIngredientDtoToSelling.idManager = parseInt(
-      sessionStorage.getItem('idManager')!
-    );
-    this.shopIngredientDtoToSelling.shopIngredientQuantity = [];
-    let stopTransaction = false;
-
-    this.cartSelling.forEach((element) => {
-      if (element.quantity != undefined) {
-        const shopIngredientQuantity = {} as ShopIngredientQuantity;
-        shopIngredientQuantity.idIngredient = element.id;
-        shopIngredientQuantity.quantity = element.quantity;
-        this.shopIngredientDtoToSelling.shopIngredientQuantity.push(
-          shopIngredientQuantity
-        );
-      }
-    });
-    //envoie du post avec comme argument this.shopIngredientDtoToSelling
-    this.storeService
-      .sellIngredients(this.shopIngredientDtoToSelling)
-      .subscribe((inventory) => {
-        if (this.storeService.isInventory(inventory)) {
-          this.inventory = inventory;
-          this.totalSellingPrice = 0;
-          this.cartSelling = [];
-        } else {
-          stopTransaction = true;
-          //erreur venant du back
-        }
-        if (!stopTransaction) {
-          this.shopIngredientDtoToBuying.idManager = parseInt(
-            sessionStorage.getItem('idManager')!
-          );
-          this.shopIngredientDtoToBuying.shopIngredientQuantity = [];
-
-          this.cartBuying.forEach((element) => {
-            if (element.quantity != undefined) {
-              const shopIngredientQuantity = {} as ShopIngredientQuantity;
-              shopIngredientQuantity.idIngredient = element.id;
-              shopIngredientQuantity.quantity = element.quantity;
-              this.shopIngredientDtoToBuying.shopIngredientQuantity.push(
-                shopIngredientQuantity
-              );
-            }
-          });
-          //envoie du post avec comme argument this.shopIngredientDtoToBuying
-          this.storeService
-            .buyIngredients(this.shopIngredientDtoToBuying)
-            .subscribe((inventory) => {
-              if (this.storeService.isInventory(inventory)) {
-                this.inventory = inventory;
-                this.cartBuying = [];
-                this.totalBuyingPrice = 0;
-              } else {
-                //erreur venant du back
-              }
-            });
-        }
-      });
+    this.sellingRequest();
+    this.buyingRequest();
   }
 
   commitTransaction() {
